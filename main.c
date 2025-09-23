@@ -17,7 +17,8 @@ char* scanner(char* palavra) {
 	
 	inicial_q0:
 		c = palavra[index++];
-	    if (isdigit(c)) goto inteiro_q2;
+	    if (isdigit(c) && c != '0') goto inteiro_q2;
+		else if (c == '0') goto zero_unico_q11;
         else if (c == '+' || c == '-') goto sinal_q1;
 		else return "<REJEITADO>";
 
@@ -87,12 +88,34 @@ char* scanner(char* palavra) {
 	    else if (c == ',') goto virgula_com_sinal_q8;
 	    else if (isdigit(c) && c != '0')  goto inteiro_com_sinal_q6;
 		else return "<REJEITADO>";
+	
+	zero_unico_q11:
+		c = palavra[index++];
+			if (c == '\0') return "<INTEIRO>";
+			else if (isdigit(c) && c != '0') goto inteiro_q2;
+			else if (c == '0') goto zeros_sequencia_q12;
+ 			else if (c == ',') goto virgula_q4;
+			else return "<REJEITADO>";
+				
+	zeros_sequencia_q12:
+		c = palavra[index++];
+			if (c == '\0') return "<REJEITADO>";
+			else if (isdigit(c) && c != '0') goto inteiro_q2;
+			else if (c == '0') goto zeros_sequencia_q12; 
+			else if (c == ',') goto virgula_q4;
+			else return "<REJEITADO>";
 }
 
 
 int main()
 {   
-    char* palavras[] = {"21", "-21", "021", "2.1", "2,1", "+0,34", "05.567", "0005,5678", "-2,1", "+0", "-0.0", "+0,012"};
+    char* palavras[] = {
+    "00000000", "+0", "-0", "0,0", "0.0", "0,00000", "1.23", "+1.23", "-1.23", "++++","-----", "+,-",
+    "++,-001", "0+0,01", "1,+234", "+2-3,08", "+1,23", "1", "25", "123456789", "+123456789", "-123456789",
+    "+1234,5678", "-1234,5678", "21", "-21", "021", "000150", "+0,34", "2,1", "0005,5678",
+    "-2,1", "-45,67", "01234", "0002,3", "21,0", "-05,0", "-5,0", "05,5670", ",1", "21,", "1,2,3"
+	};
+
     int num_palavras = sizeof(palavras) / sizeof(palavras[0]);
     for (int i = 0; i < num_palavras; i++) {
         printf("\nPalavra: %16s | Resultado: ", palavras[i]);
