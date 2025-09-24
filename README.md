@@ -43,7 +43,11 @@ The analyzer processes input strings and classifies them into one of the followi
 4. **Test your Samples:**
    If you wish to try any number, just change the array in main.c, compile and run it again!
    Happy Coding ;)
-   
+
+## JFlap Applied Automata Model
+<img width="923" height="470" alt="image" src="https://github.com/user-attachments/assets/e390b6f6-155e-49e9-b29b-a78d71be1424" />
+<img width="1280" height="574" alt="image" src="https://github.com/user-attachments/assets/0eab9e5d-d89f-4bc8-bc69-1afc8821f381" />
+
 ## Authors
 
   * **Bruno Germanetti Ramalho**
